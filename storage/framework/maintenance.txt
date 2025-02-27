@@ -1,0 +1,3 @@
+<!DOCTYPE html>
+    <h1>This server is under maintenance, if necessary please do not modify your resources.</h1>
+</html>
