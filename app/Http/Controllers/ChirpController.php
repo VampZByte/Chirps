@@ -14,8 +14,8 @@ class ChirpController extends Controller
      */
     public function index()
     {
-        return view('chirps.index', [
-            'chirps' => Chirp::with('user')->latest()->get(),
+        return view('customers', [
+            'customers' => Chirp::with('user')->latest()->get(),
         ]);
     }
 
@@ -37,8 +37,8 @@ class ChirpController extends Controller
             'message' => 'required | string | max:255'
         ]);
 
-        $request->user()->chirps()->create($validated);
-        return redirect(route('chirps.index'));
+        $request->user()->customers()->create($validated);
+        return redirect(route('customers'));
     }
 
     /**
