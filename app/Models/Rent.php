@@ -23,6 +23,11 @@ class Rent extends Model
         'Status',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     // Relationship with Car
     public function car()
     {
@@ -30,8 +35,8 @@ class Rent extends Model
     }
 
     // Relationship with User
-    public function user()
+    public function customer()
     {
-        return $this->belongsTo(User::class, 'Customer_ID', 'id');
+        return $this->belongsTo(Customer::class, 'Customer_ID');
     }
 }

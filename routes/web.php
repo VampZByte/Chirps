@@ -38,3 +38,5 @@ Route::resource('/rent', RentController::class)
     Route::get('/rent/list', [RentController::class, 'rentList'])
     ->name('rent.list')
     ->middleware(['auth', 'verified']);
+
+    Route::get('/form', [CustomerFormController::class, 'showForm']);

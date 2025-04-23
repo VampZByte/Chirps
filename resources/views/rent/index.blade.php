@@ -33,12 +33,14 @@
                             <input type="hidden" name="car_model" value="{{ $car->model }}">
 
                             <div class="mb-4">
-                            <label for="car_condition" class="block font-semibold mb-1">Customer</label>
-                            <select id="car_condition" name="car_condition" class="w-full border border-gray-300 px-3 py-2 rounded" required>
-                                <option value="">Select customer</option>
-                                <option value="Excellent">Excellent</option>
-                            </select>
-                            </div>
+                                <label for="customer_id" class="block font-semibold mb-1">Customer</label>
+                                <select id="customer_id" name="customer_id" class="w-full border border-gray-300 px-3 py-2 rounded" required>
+                            <option value="">Select customer</option>
+                                @foreach($customers as $customer)
+                                    <option value="{{ $customer->id }}">{{ $customer->customer_fname }} {{ $customer->customer_lname }}</option>
+                                @endforeach
+                            </select> 
+
 
                             <div class="mb-2 ">
                                 <label class="block font-bold">Number of Days</label>

@@ -89,4 +89,11 @@ class CustomerController extends Controller
 
         return redirect()->route('customers.index')->with('success', 'Customer deleted successfully!');
     }
+    
+    public function customerForm(): View
+{
+    $customers = Customer::select('id', 'customer_fname')->get(); // Add customer_lname if needed
+    return view('your-form-view', compact('customers'));
+}
+
 }

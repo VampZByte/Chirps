@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Rent;
 use App\Models\Cars;
 use Illuminate\Http\Request;
+use App\Models\Customer;
+
 
 class RentController extends Controller
 {
     public function index()
     {
         $cars = Cars::paginate(2); // Fetch cars
-        return view('rent.index', compact('cars'));
+        $customers = Customer::select('id', 'customer_fname', 'customer_lname')->get(); // Fetch customers
+    
+        return view('rent.index', compact('cars', 'customers'));
     }
 
     public function create()
