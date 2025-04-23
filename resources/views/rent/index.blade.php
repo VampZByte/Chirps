@@ -32,9 +32,17 @@
                             <input type="hidden" name="car_brand" value="{{ $car->brand }}">
                             <input type="hidden" name="car_model" value="{{ $car->model }}">
 
-                            <div class="mb-2">
+                            <div class="mb-4">
+                            <label for="car_condition" class="block font-semibold mb-1">Customer</label>
+                            <select id="car_condition" name="car_condition" class="w-full border border-gray-300 px-3 py-2 rounded" required>
+                                <option value="">Select customer</option>
+                                <option value="Excellent">Excellent</option>
+                            </select>
+                            </div>
+
+                            <div class="mb-2 ">
                                 <label class="block font-bold">Number of Days</label>
-                                <input type="number" name="days" class="w-full border p-2 rounded" min="1" required>
+                                <input type="number" name="days" class="border p-2 rounded" min="1" required>
                             </div>
 
                             <x-primary-button>Add to Rent List</x-primary-button>

@@ -32,7 +32,7 @@ Route::resource('/cars', CarController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('/rent', RentController::class)
-    ->only(['index', 'store', 'edit', 'update', 'create', 'destroy', 'list'])
+    ->only(['index', 'store', 'edit', 'update', 'create', 'destroy'])
     ->middleware(['auth', 'verified']);
 
     Route::get('/rent/list', [RentController::class, 'rentList'])

@@ -22,20 +22,20 @@ class RentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'car_id' => 'required|exists:cars,Car_ID',
+            'car_id' => 'required|exists:cars,id', // ✅ Changed 'Car_ID' to 'id'
             'days' => 'required|integer|min:1',
         ]);
 
-        $car = Cars::where('Car_ID', $request->car_id)->first();
+        $car = Cars::where('id', $request->car_id)->first(); // ✅ Changed 'Car_ID' to 'id'
 
         // Calculate values
         $rentDate = now();
-        $returnDate = now()->addDays($request->days);
-        $totalPrice = $car->Rental_Price * $request->days;
+        $returnDate = now()->addDays((int) $request->days); // Cast to int
+        $totalPrice = $car->Rental_Price * (int) $request->days; // Also cast to int        
 
         Rent::create([
-            'Customer_ID' => auth()->id(),               // Assumes user is logged in
-            'Car_ID' => $car->Car_ID,
+            'Customer_ID' => auth()->id(),           // Assumes user is logged in
+            'Car_ID' => $car->id,                    // ✅ Changed 'id' key to match your Rent table field
             'Rent_Date' => $rentDate,
             'Return_Date' => $returnDate,
             'Total_Price' => $totalPrice,
@@ -58,16 +58,17 @@ class RentController extends Controller
     public function update(Request $request, Rent $rent)
     {
         $request->validate([
-            'car_id' => 'required|exists:cars,Car_ID',
+            'car_id' => 'required|exists:cars,id', // ✅ Changed 'id' to 'car_id' for consistency
             'days' => 'required|integer|min:1',
         ]);
 
-        $car = Cars::where('Car_ID', $request->car_id)->first();
+        $car = Cars::where('id', $request->car_id)->first(); // ✅ Use the correct column
+
         $returnDate = $rent->Rent_Date->addDays($request->days);
         $totalPrice = $car->Rental_Price * $request->days;
 
         $rent->update([
-            'Car_ID' => $car->Car_ID,
+            'Car_ID' => $car->id, // ✅ Use correct car ID
             'Return_Date' => $returnDate,
             'Total_Price' => $totalPrice,
         ]);

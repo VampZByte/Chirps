@@ -20,10 +20,10 @@
             <tbody>
                 @forelse ($rents as $rent)
                     <tr>
-                        <td class="px-4 py-2 border">{{ $rent->$car->brand }} {{ $rent->car->model }}</td>
-                        <td class="px-4 py-2 border">{{ $rent->$customers->name }}</td>
-                        <td class="px-4 py-2 border">{{ $rent->$days }}</td>
-                        <td class="px-4 py-2 border">{{ $rent->$created_at->format('M d, Y') }}</td>
+                        <td class="px-4 py-2 border">{{ $rent->car->brand }} {{ $rent->car->model }}</td>
+                        <td class="px-4 py-2 border">{{ $rent->customers->customer_fname }}</td>
+                        <td class="px-4 py-2 border">{{ $rent->days }}</td>
+                        <td class="px-4 py-2 border">{{ $rent->created_at->format('M d, Y') }}</td>
                     </tr>
                 @empty
                     <tr>
