@@ -5,22 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rent extends Model
+class Payment extends Model
 {
     use HasFactory;
 
-    protected $table = 'rent'; // Your actual table name
-    protected $primaryKey = 'Rent_ID'; // Custom primary key
+    protected $table = 'payments'; // Your actual table name
+    protected $primaryKey = 'Payment_ID'; // Custom primary key
 
     public $timestamps = false; // Disable timestamps if your table doesn't use them
 
     protected $fillable = [
         'Customer_ID',
-        'Car_ID',
-        'Rent_Date',
-        'Return_Date',
-        'Total_Price',
-        'Status',
+        'Rent_ID',
+        'Amount_Paid',
+        'Payment_Date',
+        'Payment_Method'
     ];
 
     public function user()
@@ -29,9 +28,9 @@ class Rent extends Model
     }
 
     // Relationship with Car
-    public function car()
+    public function rent()
     {
-        return $this->belongsTo(Cars::class, 'Car_ID', 'id');
+        return $this->belongsTo(Cars::class, 'Rent_ID', 'id');
     }
 
     // Relationship with User
@@ -39,10 +38,4 @@ class Rent extends Model
     {
         return $this->belongsTo(Customer::class, 'Customer_ID');
     }
-
-    public function payment()
-    {
-        return $this->hasOne(Payment::class, 'Rent_ID', 'Rent_ID');
-    }    
-
 }

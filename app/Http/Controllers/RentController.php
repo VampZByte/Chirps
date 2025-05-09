@@ -25,28 +25,33 @@ class RentController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'car_id' => 'required|exists:cars,id', // ✅ Changed 'Car_ID' to 'id'
-            'days' => 'required|integer|min:1',
-        ]);
+            $request->validate([
+                'car_id' => 'required|exists:cars,id', // ✅ Changed 'Car_ID' to 'id'
+                'rent_date' => 'required|date',
+                'return_date' => 'required|date|after_or_equal:rent_date',
+            ]);
 
-        $car = Cars::where('id', $request->car_id)->first(); // ✅ Changed 'Car_ID' to 'id'
+        $car = Cars::where('id', $request->car_id)->first(); 
+        $rent_date = $request->rent_date;
+        $return_date = $request->return_date;
 
         // Calculate values
-        $rentDate = now();
-        $returnDate = now()->addDays((int) $request->days); // Cast to int
-        $totalPrice = $car->Rental_Price * (int) $request->days; // Also cast to int        
+        $totalPrice = $car->rental_price * \Carbon\Carbon::parse($rent_date)->diffInDays(\Carbon\Carbon::parse($return_date)); 
 
         Rent::create([
-            'Customer_ID' => auth()->id(),           // Assumes user is logged in
-            'Car_ID' => $car->id,                    // ✅ Changed 'id' key to match your Rent table field
-            'Rent_Date' => $rentDate,
-            'Return_Date' => $returnDate,
+            'Customer_ID' => $request->customer_id,
+            'Car_ID' => $car->id,                
+            'Rent_Date' => $rent_date,
+            'Return_Date' => $return_date,
             'Total_Price' => $totalPrice,
             'Status' => 'Ongoing',
         ]);
 
-        return redirect()->route('rent.list')->with('success', 'Car added to rent list.');
+        $car->availability_status = 'Not Available';
+        $car->save();
+    
+        return redirect()->back()->with('success', 'Car added to rent list.');
+
     }
 
     public function show(Rent $rent)
@@ -68,12 +73,12 @@ class RentController extends Controller
 
         $car = Cars::where('id', $request->car_id)->first(); // ✅ Use the correct column
 
-        $returnDate = $rent->Rent_Date->addDays($request->days);
+        $return_date = $rent->Rent_Date->addDays($request->days);
         $totalPrice = $car->Rental_Price * $request->days;
 
         $rent->update([
             'Car_ID' => $car->id, // ✅ Use correct car ID
-            'Return_Date' => $returnDate,
+            'Return_Date' => $return_date,
             'Total_Price' => $totalPrice,
         ]);
 

@@ -14,6 +14,8 @@ class Customer extends Model
         'customer_lname', // Add any other necessary fields
         'age',
         'phone',
+        'license_id',
+        'valid_id',
         'address',
     ];
 }

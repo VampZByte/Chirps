@@ -28,45 +28,58 @@
             <select id="model" name="model" class="w-full border border-gray-300 px-3 py-2 rounded" required>
                 <option value="">Select a model</option>
             </select>
+
             </div>
-                <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const brandSelect = document.getElementById("brand");
-            const modelSelect = document.getElementById("model");
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const brandSelect = document.getElementById("brand");
+                    const modelSelect = document.getElementById("model");
 
-            const modelsByBrand = {
-                Toyota: ["Corolla", "Vios"],
-                Honda: ["Civic", "Accord"],
-                Ford: ["Mustang", "Ranger"],
-                BMW: ["X3", "3 Series"],
-                Nissan: ["Navara", "Almera"],
-            };
+                    const modelsByBrand = {
+                        Toyota: ["Corolla", "Vios"],
+                        Honda: ["Civic", "Accord"],
+                        Ford: ["Mustang", "Ranger"],
+                        BMW: ["X3", "3 Series"],
+                        Nissan: ["Navara", "Almera"],
+                    };
 
-            const selectedBrand = "{{ $car->brand }}";
-            const selectedModel = "{{ $car->model }}";
+                    const selectedBrand = "{{ $car->brand }}";
+                    const selectedModel = "{{ $car->model }}";
 
-            function updateModels(brand) {
-                modelSelect.innerHTML = '<option value="">Select a model</option>';
-                if (modelsByBrand[brand]) {
-                    modelsByBrand[brand].forEach(model => {
-                        const option = document.createElement("option");
-                        option.value = model;
-                        option.textContent = model;
-                        if (model === selectedModel) option.selected = true;
-                        modelSelect.appendChild(option);
+                    function updateModels(brand) {
+                        modelSelect.innerHTML = '<option value="">Select a model</option>';
+                        if (modelsByBrand[brand]) {
+                            modelsByBrand[brand].forEach(model => {
+                                const option = document.createElement("option");
+                                option.value = model;
+                                option.textContent = model;
+                                if (model === selectedModel) option.selected = true;
+                                modelSelect.appendChild(option);
+                            });
+                        }
+                    }
+
+                    if (selectedBrand) {
+                        updateModels(selectedBrand);
+                    }
+
+                    brandSelect.addEventListener("change", function () {
+                        updateModels(this.value);
                     });
-                }
-            }
+                });
+            </script>
 
-            if (selectedBrand) {
-                updateModels(selectedBrand);
-            }
-
-            brandSelect.addEventListener("change", function () {
-                updateModels(this.value);
-            });
-        });
-    </script>
+            <div class="mb-4">
+            <label for="color" class="block font-semibold mb-1">Color</label>
+            <select id="color" name="color" class="w-full border border-gray-300 px-3 py-2 rounded" required>
+                <option value="">Select Color</option>
+                <option value="Red" {{ $car->color === 'Red' ? 'selected' : '' }}>Red</option>
+                <option value="Blue" {{ $car->color === 'Blue' ? 'selected' : '' }}>Blue</option>
+                <option value="Black" {{ $car->color === 'Black' ? 'selected' : '' }}>Black</option>
+                <option value="White" {{ $car->color === 'White' ? 'selected' : '' }}>White</option>
+                <option value="Grey" {{ $car->color === 'Grey' ? 'selected' : '' }}>Grey</option>
+            </select>
+            </div>
 
             <div class="mb-4">
                 <label for="year" class="block font-semibold mb-1">Year</label>

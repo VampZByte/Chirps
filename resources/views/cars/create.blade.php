@@ -57,7 +57,18 @@
                 });
             });
             </script>
-
+            
+            <div class="mb-4">
+            <label for="color" class="block font-semibold mb-1">Color</label>
+            <select id="color" name="color" class="w-full border border-gray-300 px-3 py-2 rounded" required>
+                <option value="">Select Color</option>
+                <option value="Red">Red</option>
+                <option value="Blue">Blue</option>
+                <option value="Black">Black</option>
+                <option value="White">White</option>
+                <option value="Grey">Grey</option>
+            </select>
+            </div>
 
             <div class="mb-4">
                 <label for="year" class="block font-semibold mb-1">Year</label>
@@ -75,6 +86,7 @@
                 <option value="">Select status</option>
                 <option value="Available">Available</option>
                 <option value="Unavailable">Unavailable</option>
+                <option value="Damaged">Damaged</option>
                 <option value="Maintenance">Maintenance</option>
             </select>
              </div>

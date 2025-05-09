@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('model');
             $table->string('brand');
             $table->string('year');
+            $table->string('color');
             $table->string('rental_price');
             $table->string('availability_status');
             $table->string('car_condition');

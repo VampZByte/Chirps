@@ -7,14 +7,22 @@
 
 <!-- Display Customers -->
 <div class="w-full max-w-4xl mx-auto overflow-x-auto mt-1 bg-white shadow rounded-md p-4">
+<h2 class="text-2xl font-bold mb-6">Customers</h2>
+        <div class="mb-4 text-right">
+            <a href="{{ route('customers.create') }}" class="inline-block bg-blue-600 text-black px-4 py-2 rounded hover:bg-blue-700">
+                + Add Customer
+            </a>
+        </div>
     <table class="w-full text-left text-sm">
         <thead class="bg-gray-100 font-semibold text-gray-900 text-2xl">
             <tr>
                 <th class="px-4 py-3">First Name</th>
                 <th class="px-4 py-3">Last Name</th>
-                <th class="px-4 py-3">Address</th>
-                <th class="px-4 py-3">Contact Number</th>
                 <th class="px-4 py-3">Age</th>
+                <th class="px-4 py-3">Contact Number</th>
+                <th class="px-4 py-3">License</th>
+                <th class="px-4 py-3">Valid</th>
+                <th class="px-4 py-3">Address</th>
                 <th class="px-4 py-3">Actions</th>
             </tr>
         </thead>
@@ -23,9 +31,23 @@
                 <tr class="hover:bg-gray-50">
                     <td class="px-4 py-3">{{ $customer->customer_fname }}</td>
                     <td class="px-4 py-3">{{ $customer->customer_lname }}</td>
-                    <td class="px-4 py-3">{{ $customer->address }}</td>
-                    <td class="px-4 py-3">********{{ substr($customer->phone, -2) }}</td>
                     <td class="px-4 py-3">{{ $customer->age }}</td>
+                    <td class="px-4 py-3">********{{ substr($customer->phone, -2) }}</td>
+                    <td>
+                        @if ($customer->license_id)
+                        <img src="{{ asset('storage/' . $customer->license_id) }}" alt="License ID" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
+                        @else
+                            No image
+                        @endif
+                    </td>
+                    <td>
+                        @if ($customer->valid_id)
+                        <img src="{{ asset('storage/' . $customer->valid_id) }}" alt="Valid ID" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
+                        @else
+                            No image
+                        @endif
+                    </td>
+                    <td class="px-4 py-3">{{ $customer->address }}</td>
                     <td class="px-4 py-3">
                         <div class="flex gap-2">
                             <a href="{{ route('customers.edit', $customer->id) }}" class="text-blue-600 hover:underline">Edit</a>
@@ -46,36 +68,4 @@
         {{ $customers->links() }}
     </div>
 </div>
-
-    <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-        <form method="POST" action="{{ route('customers.store') }}">
-            @csrf
-            <input type="text" name="customer_fname" placeholder="First Name" 
-                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
-                value="{{ old('customer_fname') }}" required>
-            <x-input-error :messages="$errors->get('customer_fname')" class="mt-2" />
-
-            <input type="text" name="customer_lname" placeholder="Last Name" 
-                class="block w-full border-gray-300 mt-2 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
-                value="{{ old('customer_lname') }}" required>
-            <x-input-error :messages="$errors->get('customer_lname')" class="mt-2" />
-
-            <input type="number" name="age" placeholder="Age" 
-                class="block w-full border-gray-300 mt-2 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
-                value="{{ old('age') }}" required>
-            <x-input-error :messages="$errors->get('age')" class="mt-2" />
-
-            <input type="text" name="phone" placeholder="Phone Number" 
-                class="block w-full border-gray-300 mt-2 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
-                value="{{ old('phone') }}" required>
-            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-
-            <textarea name="address" placeholder="Address"
-                class="block w-full border-gray-300 mt-2 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">{{ old('address') }}</textarea>
-            <x-input-error :messages="$errors->get('address')" class="mt-2" />
-
-            <x-primary-button class="mt-4">{{ __('Save Customer') }}</x-primary-button>
-        </form>
-
-    </div>
 </x-app-layout>

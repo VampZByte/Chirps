@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="w-full max-w-6xl mx-auto overflow-x-auto mt-4 bg-white shadow rounded-md p-6">
-    <h2 class="text-2xl font-bold mb-6">Cars</h2>
+    <h2 class="text-2xl font-bold">Cars</h2>
         <div class="mb-4 text-right">
             <a href="{{ route('cars.create') }}" class="inline-block bg-blue-600 text-black px-4 py-2 rounded hover:bg-blue-700">
                 + Add New Car
@@ -16,8 +16,10 @@
         <table class="w-full text-left text-sm">
             <thead class="bg-gray-100 font-semibold text-gray-900 text-lg">
                 <tr>
-                        <th class="px-4 py-3">Brand</th>
+                    <th class="px-4 py-3">Brand</th>
                     <th class="px-4 py-3">Model</th>
+                    <th class="px-4 py-3">Plate Number</th>
+                    <th class="px-4 py-3">Color</th>
                     <th class="px-4 py-3">Year</th>
                     <th class="px-4 py-3">Fee</th>
                     <th class="px-4 py-3">Available</th>
@@ -30,6 +32,8 @@
                     <tr class="hover:bg-gray-50">
                     <td class="px-4 py-3">{{ $car->brand }}</td>
                         <td class="px-4 py-3">{{ $car->model }}</td>
+                        <td class="px-4 py-3">ABCD-{{ $car->id }}</td>
+                        <th class="px-4 py-3">{{ $car->color }}</th>
                         <td class="px-4 py-3">{{ $car->year }}</td>
                         <td class="px-4 py-3">₱{{ number_format($car->rental_price, 2) }}</td>
                         <td class="px-4 py-3">{{ $car->availability_status }}</td>

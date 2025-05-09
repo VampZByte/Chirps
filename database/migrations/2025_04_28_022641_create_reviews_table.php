@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->string('customer_fname');
-            $table->string('customer_lname');
-            $table->string('age');
-            $table->string('phone');
-            $table->string('license_id');
-            $table->string('valid_id');
-            $table->string('address');
+            $table->unsignedBigInteger('Customer_ID'); // Foreign key
+            $table->unsignedBigInteger('Car_ID');
+            $table->unsignedBigInteger('Rent_ID'); // Foreign key
+            $table->string('Rating');
+            $table->string('Feedback');
+            $table->date('Review_Date');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('reviews');
     }
 };

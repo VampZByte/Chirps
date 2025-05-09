@@ -18,14 +18,27 @@
         <h3 class="text-lg font-bold mb-3">Available Cars</h3>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            @if ($errors->any())
+            <div class="mb-4 p-4 bg-red-100 border border-red-400 rounded">
+            <ul class="list-disc list-inside text-sm text-red-700">
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+            </div>
+            @endif
+
             @foreach ($cars as $car)
                 <div class="border p-4 rounded-md shadow bg-gray-50">
                     <h4 class="text-lg font-semibold">{{ $car->brand }} - {{ $car->model }} ({{ $car->year }})</h4>
+                    <h2 class="text-lg font-semibold"> Color {{$car->color}}</h2>
                     <p class="text-gray-600">₱{{ number_format($car->rental_price, 2) }} per day</p>
                     <p class="text-sm text-green-600 mt-1">Status: {{ $car->availability_status }}</p>
                     <p class="text-sm text-gray-500">Condition: {{ $car->car_condition }}</p>
 
                     @if (strtolower($car->availability_status) === 'available')
+
                         <form method="POST" action="{{ route('rent.store') }}" class="mt-4">
                             @csrf
                             <input type="hidden" name="car_id" value="{{ $car->id }}">
@@ -41,10 +54,14 @@
                                 @endforeach
                             </select> 
 
+                            <div class="mb-2">
+                                <label for="rent_date" class="block font-bold">Rent Date</label>
+                                <input type="date" name="rent_date" class="border p-2 rounded " required>
+                            </div>
 
-                            <div class="mb-2 ">
-                                <label class="block font-bold">Number of Days</label>
-                                <input type="number" name="days" class="border p-2 rounded" min="1" required>
+                            <div class="mb-2">
+                                <label for="return_date" class="block font-bold">Return Date</label>
+                                <input type="date" name="return_date" class="border p-2 rounded " required>
                             </div>
 
                             <x-primary-button>Add to Rent List</x-primary-button>
