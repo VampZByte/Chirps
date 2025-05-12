@@ -53,4 +53,9 @@ Route::post('/cars/{id}/return/{status}', [CarController::class, 'returnAction']
 
 Route::delete('/rent/{rent}', [RentController::class, 'destroy'])->name('rent.destroy');
 
+Route::get('/rent/contract/{id}', [RentController::class, 'showContract'])->name('rent.contract');
+
+
+
+
 

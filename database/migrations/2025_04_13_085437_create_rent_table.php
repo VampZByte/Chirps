@@ -20,6 +20,22 @@ return new class extends Migration
             $table->decimal('Total_Price', 10, 2);
             $table->string('Status');
             $table->timestamps();
+            
+            $table->string('fuel_policy')->nullable();
+            $table->decimal('fuel_service_fee', 10, 2)->nullable();
+            $table->string('authorized_driver')->nullable();
+            $table->string('authorized_driver_license')->nullable();
+
+            $table->boolean('insurance_covered')->nullable();
+            $table->boolean('insurance_renter_pays')->nullable();
+            $table->string('insurance_provider')->nullable();
+            $table->text('insurance_coverage')->nullable();
+            
+            $table->decimal('late_fee', 10, 2)->nullable();
+            $table->string('owner_signature')->nullable();
+            $table->date('owner_date')->nullable();
+            $table->string('renter_signature')->nullable();
+            $table->date('renter_date')->nullable();
 
             // Foreign key constraints (optional, if customers and cars tables exist)
             $table->foreign('Customer_ID')->references('id')->on('customers')->onDelete('cascade');

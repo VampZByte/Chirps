@@ -18,9 +18,11 @@ class RentController extends Controller
         return view('rent.index', compact('cars', 'customers'));
     }
 
-    public function create()
+    public function create($carId)
     {
-        return view('rent.create');
+        $car = Cars::findOrFail($carId); // Fetch the selected car
+        $customers = Customer::all(); // Fetch all customers
+        return view('rent.create', compact('car', 'customers')); // Pass selected car and customers to the view
     }
 
     public function store(Request $request)
@@ -45,6 +47,7 @@ class RentController extends Controller
             'Return_Date' => $return_date,
             'Total_Price' => $totalPrice,
             'Status' => 'Ongoing',
+            
         ]);
 
         $car->availability_status = 'Not Available';
@@ -74,7 +77,7 @@ class RentController extends Controller
         $car = Cars::where('id', $request->car_id)->first(); // ✅ Use the correct column
 
         $return_date = $rent->Rent_Date->addDays($request->days);
-        $totalPrice = $car->Rental_Price * $request->days;
+        $totalPrice = $car->Rental_Price * $request->days;  
 
         $rent->update([
             'Car_ID' => $car->id, // ✅ Use correct car ID
@@ -93,7 +96,23 @@ class RentController extends Controller
 
     public function rentList()
     {
-        $rents = Rent::with('car', 'user')->paginate(10);
+        $rents = Rent::with(['car', 'customer'])->paginate(10);
         return view('rent.list', compact('rents'));
     }
+
+    
+    public function showContract($id)
+    {
+        $rent = Rent::with(['car', 'customer'])->findOrFail($id);
+
+        // Calculate total days using Carbon
+        $Rent_Date = \Carbon\Carbon::parse($rent->Rent_Date);
+        $Return_Date = \Carbon\Carbon::parse($rent->Return_Date);
+        $totalDays = $Rent_Date->diffInDays($Return_Date) + 1; // include the start day
+
+        return view('rent.contract', compact('rent', 'totalDays'));
+    }
+
+
+
 }

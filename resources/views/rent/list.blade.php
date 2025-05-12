@@ -16,6 +16,7 @@
                         <th class="px-5 py-2 border">Rent Date</th>
                         <th class="px-5 py-2 border">Return Date</th>
                         <th class="px-5 py-2 border">Status</th>
+                        <th class="px-5 py-2 border">Contract</th>
                         <th class="px-5 py-2 border">Actions</th>   
                     </tr>
                 </thead>
@@ -27,6 +28,12 @@
                 <td class="px-3 py-3 border">{{ \Carbon\Carbon::parse($rent->Rent_Date)->format('d/m/Y') }}</td>
                 <td class="px-3 py-3 border">{{ \Carbon\Carbon::parse($rent->Return_Date)->format('d/m/Y') }}</td>
                 <td class="px-3 py-3 border">{{ $rent->car->availability_status }}</td>
+                <td class="px-3 py-3 border text-center">
+                <a href="{{ route('rent.contract', ['id' => $rent->Rent_ID]) }}"
+                class="inline-block bg-blue-600 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded transition duration-200">
+                    View Rental Contract
+                </a>
+                </td>
                 <td class="px-3 py-3 border">
                 <button onclick="toggleReturnOptions({{ $rent->car->id }})"
                 class="bg-blue-600 text-black px-5 py-1 rounded hover:bg-blue-700">Return</button>

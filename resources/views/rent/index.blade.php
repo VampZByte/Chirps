@@ -7,9 +7,6 @@
 
     <div class="max-w-5xl mx-auto mt-6 p-6 bg-white shadow-md rounded-md">
         <div class="mb-4 text-right">
-            <a href="{{ route('rent.create') }}" class="inline-block bg-blue-600 text-black px-4 py-2 rounded hover:bg-blue-700">
-                + Add rent
-            </a>
             <a href="{{ route('rent.list') }}" class="inline-block bg-blue-600 text-black px-4 py-2 rounded hover:bg-blue-700">
                 Rent List
             </a>
@@ -64,6 +61,53 @@
                                 <input type="date" name="return_date" class="border p-2 rounded " required>
                             </div>
 
+                            <div class="mb-4">
+                                <label class="block font-semibold mb-1">Fuel Policy</label>
+                                <div class="flex items-center">
+                                    <input type="radio" name="fuel_policy" value="full_to_full" id="full_to_full" class="mr-2" required>
+                                    <label for="full_to_full">Full-to-Full</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="radio" name="fuel_policy" value="same_level" id="same_level" class="mr-2">
+                                    <label for="same_level">Same Level as Rented</label>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <h3 class="font-bold text-lg mb-2">Use of Vehicle</h3>
+                                <div class="flex items-center">
+                                    <input type="checkbox" name="use_vehicle_illegal" id="use_vehicle_illegal" class="mr-2" required>
+                                    <label for="use_vehicle_illegal">Will not be used for illegal purposes or racing</label>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="block font-semibold mb-1">Insurance</label>
+                                <div class="flex items-center">
+                                    <input type="checkbox" name="insurance_covered" value="yes" id="insurance_covered" class="mr-2" required>
+                                    <label for="insurance_covered">The vehicle is covered by insurance</label>
+                                </div>
+                                <div class="mt-2">
+                                    <label for="insurance_provider" class="block font-semibold">Insurance Provider</label>
+                                    <input type="text" name="insurance_provider" id="insurance_provider" placeholder="Insurance Provider" class="border p-2 rounded w-full">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <h3 class="font-bold text-lg mb-2">Return Condition</h3>
+                                <ul>
+                                    <li>Vehicle must be returned on the agreed date and time.</li>
+                                    <li>Vehicle must be returned clean and in the same condition as rented.</li>
+                                    <li>Vehicle must include all accessories (jack, tools, documents, etc.).</li>
+                                </ul>
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="flex items-center">
+                                    <input type="checkbox" name="agreement_confirmation" id="agreement_confirmation" class="mr-2" required>
+                                    <label for="agreement_confirmation">I agree to the terms and conditions of the rental agreement.</label>
+                                </div>
+                            </div>
                             <x-primary-button>Add to Rent List</x-primary-button>
                         </form>
                     @else

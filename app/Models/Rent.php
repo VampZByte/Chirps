@@ -9,10 +9,10 @@ class Rent extends Model
 {
     use HasFactory;
 
-    protected $table = 'rent'; // Your actual table name
-    protected $primaryKey = 'Rent_ID'; // Custom primary key
+    protected $table = 'rent';
+    protected $primaryKey = 'Rent_ID';
 
-    public $timestamps = false; // Disable timestamps if your table doesn't use them
+    public $timestamps = false;
 
     protected $fillable = [
         'Customer_ID',
@@ -20,21 +20,25 @@ class Rent extends Model
         'Rent_Date',
         'Return_Date',
         'Total_Price',
-        'Status',
+        'Payment_Method',
+        'Fuel_Policy',       // e.g., "Full-to-Full" or "Same Level"
+        'Late_Fee',          // late fee per hour/day
+        'Insurance_Provider',
+        'Insurance_Coverage',
+        'Status',            // e.g., "Active", "Returned", "Damaged"
     ];
 
+    // Relationships
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Relationship with Car
     public function car()
     {
         return $this->belongsTo(Cars::class, 'Car_ID', 'id');
     }
 
-    // Relationship with User
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'Customer_ID');
@@ -43,6 +47,16 @@ class Rent extends Model
     public function payment()
     {
         return $this->hasOne(Payment::class, 'Rent_ID', 'Rent_ID');
-    }    
+    }
+
+    public function cars()
+    {
+        return $this->belongsTo(Car::class);
+    }
+
+    public function customers()
+    {
+        return $this->belongsTo(Customer::class);
+    }
 
 }

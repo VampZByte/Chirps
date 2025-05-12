@@ -36,8 +36,7 @@
                     ['url' => route('customers.index'), 'label' => 'Customer'],
                     ['url' => route('cars.index'), 'label' => 'Vehicles'],
                     ['url' => route('rent.index'), 'label' => 'Rent'],
-                    ['url' => route('payments.index'), 'label' => 'Payments'],
-                    ['url' => route('rent.index'), 'label' => 'Reviews']
+                    ['url' => route('payments.index'), 'label' => 'Payments']
                 ]" />
 
                 <!-- Content -->
