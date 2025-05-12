@@ -19,9 +19,8 @@ Route::middleware('auth')->group(function () {
 });
 require __DIR__.'/auth.php';
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard', [CustomerController::class, 'showAdmin'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('/customers', CustomerController::class)
     ->only(['index', 'store', 'edit', 'create', 'update', 'destroy'])
@@ -41,7 +40,7 @@ Route::get('/rent/list', [RentController::class, 'rentList'])
 
 Route::resource('/payments', PaymentController::class)
     ->only(['index', 'store', 'edit', 'update', 'create', 'destroy'])
-    ->middleware(['auth', 'verified']); 
+    ->middleware(['auth', 'verified']);
 
 Route::put('/payments/{payment}', [PaymentController::class, 'update'])->name('payments.update');
 
