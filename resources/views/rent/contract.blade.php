@@ -38,14 +38,12 @@
         <h3 class="font-bold">3. Rental Fee</h3>
         <p>Daily Rate: ₱{{ number_format($rent->car->rental_price, 2) }}</p>
         <p>Total Fee: ₱{{ number_format($rent->Total_Price, 2) }}</p>
-        <p>Total Paid: {{ $rent->Amount_Paid }} </p>
-        <p>Payment Method: {{ $rent->payments->Payment_Method ?? 'N/A' }}</p>
         <p class="text-sm text-red-600">Full payment must be made before the vehicle is released.</p>
 
         <hr class="my-4">
 
         <h3 class="font-bold">4. Fuel Policy</h3>
-        <p>☑ {{ $rent->fuel_policy === 'full_to_full' ? 'Full-to-Full' : 'Same level as rented' }}</p>
+        <p> {{ $rent->fuel_policy === 'full_to_full' ? 'Full-to-Full' : 'Same level as rented' }}</p>
         <p>- If the vehicle is returned with less fuel, the renter agrees to pay for the missing fuel plus a ₱500 service fee.</p>
 
         <hr class="my-4">
@@ -54,10 +52,8 @@
         <p>The renter agrees the vehicle:</p>
         <ul class="list-disc pl-6">
             <li>- Will not be used for illegal purposes or racing</li>
-            <li>- Will only be driven by the renter or authorized drivers listed below</li>
         </ul>
-        <p class="mt-2">Authorized Additional Driver(s):</p>
-        <p>Name: _____________________ | License Pic.: _________________</p>
+
 
         <hr class="my-4">
 
@@ -71,9 +67,8 @@
         <hr class="my-4">
 
         <h3 class="font-bold">7. Insurance (if applicable)</h3>
-        <p>☑ {{ $rent->insurance_covered === 'yes' ? 'The vehicle is covered by insurance.' : 'No insurance coverage declared.' }}</p>
+        <p> {{ $rent->insurance_covered === 'yes' ? 'The vehicle is covered by insurance.' : 'No insurance coverage declared.' }}</p>
         <p>Insurance Provider: {{ $rent->insurance_provider ?? 'N/A' }}</p>
-        <p>Coverage Details: _______________________</p>
 
         <hr class="my-4">
 

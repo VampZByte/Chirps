@@ -84,7 +84,7 @@
                             <div class="mb-4">
                                 <label class="block font-semibold mb-1">Insurance</label>
                                 <div class="flex items-center">
-                                    <input type="checkbox" name="insurance_covered" value="yes" id="insurance_covered" class="mr-2" required>
+                                    <input type="checkbox" name="insurance_covered" value="yes" id="insurance_covered" class="mr-2">
                                     <label for="insurance_covered">The vehicle is covered by insurance</label>
                                 </div>
                                 <div class="mt-2">

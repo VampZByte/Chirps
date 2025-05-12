@@ -35,7 +35,7 @@
             
             <div class="mb-4">
                 <label for="amount" class="block font-semibold mb-1">Amount Paid</label>
-                <input type="number" id="amount" name="amount_paid" class="w-full border border-gray-300 px-3 py-2 rounded" value="{{ old('amount_paid') }}" required>
+                <input type="number" id="amount" name="amount_paid" class="w-full bord  er border-gray-300 px-3 py-2 rounded" value="{{ old('amount_paid') }}" required>
                 @error('amount_paid')
                     <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                 @enderror
