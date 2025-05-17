@@ -28,7 +28,6 @@
             @endisset
 
             <!-- Page Content -->
-
             <main class="flex h-full-screen">
                 <!-- Sidebar -->
                 <x-sidebar :links="[

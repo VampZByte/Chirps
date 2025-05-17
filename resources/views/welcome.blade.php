@@ -2,85 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Rentals</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-image: url({{ asset('image/back.jpg') }});
-            background-size: cover;
-            background-repeat: no-repeat;
-
-        }
-
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 90px 100px;
-
-        }
-        .hero-text {
-            max-width: 500px;
-        }
-        .hero-text h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-        .hero-text p {
-            color: #666;
-            margin-bottom: 30px;
-        }
-        .btn-join {
-            width: 130px;
-            background: linear-gradient(90deg, #229dc2, #109daf);
-            padding: 15px 30px;
-            border: none;
-            color: #fff;
-            font-weight: 600;
-            border-radius: 25px;
-            font-size: 16px;
-            text-decoration: none;
-        }
-        .hero-img img {
-            max-width: 700px;
-            border-radius: 15px;
-        }
-
-        .nav_link{
-            transform: all 0.3s ease;
-        }
-        .nav_link:hover {
-            transform: translateX(-10px) scale(1.1);
-        }
-    </style>
+    <title>Car Rental | Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <img src="{{ asset('image/logo.jpg') }}" alt="logo" style="width: 50px; height: auto;">
-            <h1>Car Rentals</h1>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+<body class="bg-cover bg-center min-h-screen flex items-center justify-center" style="background-image: url('{{ asset('image/back.jpg') }}');">
+    <div class="bg-white bg-opacity-90 p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+
+        @if (session('status'))
+            <div class="mb-4 text-sm text-green-600 font-medium">
+                {{ session('status') }}
             </div>
-        </div>
-    </nav>
+        @endif
 
-    <section class="hero" style="margin-top: 90px">
-        <div class="nav_link hero-text" style="background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 10px;">
-            <h1 style="color: #2b7fc4; font-weight: bold;">Car Rentals</h1>
-            <p style="color: #2d7983; font-size: 18px;">Your one-stop solution for renting cars at affordable prices!</p>
-            <a href="{{ route('register') }}" class="btn-join">Register</a>
-            <a href="{{ route('login') }}" class="btn-join">Login</a>
-        </div>
-        <div class="nav_link hero-img">
-            <img src="{{ asset('image/cars.jpg') }}" alt="Car">
-        </div>
-    </section>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
 
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input id="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username">
+                @error('email') <p class="text-sm text-red-600 mt-1">{{ $message }}</p> @enderror
+            </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+            <div class="mt-4">
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input id="password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" type="password" name="password" required autocomplete="current-password">
+                @error('password') <p class="text-sm text-red-600 mt-1">{{ $message }}</p> @enderror
+            </div>
+
+            <div class="block mt-4">
+                <label for="remember_me" class="inline-flex items-center">
+                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
+                </label>
+            </div>
+
+            <div class="flex items-center justify-between mt-6">
+                @if (Route::has('password.request'))
+                    <a class="text-sm text-blue-600 hover:underline" href="{{ route('password.request') }}">
+                        Forgot your password?
+                    </a>
+                @endif
+
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">
+                    Log in
+                </button>
+            </div>
+        </form>
+
+        <!--<div class="text-center mt-4">
+            <a class="text-sm text-blue-600 hover:underline" href="{{ route('register') }}">
+                Don't have an account? Register here!
+            </a>
+        </div>-->
+    </div>
 </body>
 </html>

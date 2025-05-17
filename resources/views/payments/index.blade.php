@@ -4,7 +4,10 @@
                 Rent List
             </h2>
         </x-slot>
-
+            <a href="{{ route('payments.archived') }}"
+            class="bg-gray-500 text-white px-3 py-2 rounded hover:bg-gray-600">
+            View Archived Payments
+            </a>
         <div class="max-w-5xl mx-auto mt-6 p-6 bg-white shadow-md rounded-md">
             <h3 class="text-lg font-bold mb-4">Payment</h3>
 

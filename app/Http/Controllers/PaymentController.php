@@ -13,16 +13,14 @@ class PaymentController extends Controller
 
     public function index()
     {
-        $rents = Rent::with(['payment', 'customer'])
-                    ->where('is_archived', false)
-                    ->paginate(5);
-
+        $rents = Rent::with('payment', 'customer')->paginate(5);
         return view('payments.index', compact('rents'));
     }
 
+
     public function create(Request $request)
     {
-        $rent = Rent::findOrFail($request->rent_id);
+        $rents = Rent::findOrFail($request->rent_id);
         $customer = $rent->customer;
         $car = $rent->car;
 
@@ -93,4 +91,31 @@ class PaymentController extends Controller
         $payment->delete();
         return redirect()->route('payments.index')->with('success', 'Payment deleted successfully.');
     }
+
+        public function archive($id)
+    {
+        $payments = Payment::findOrFail($id);
+        $payments->is_archived = true;
+        $payments->save();
+
+
+        return redirect()->back()->with('success', 'Payment archived and car marked as available.');
+    }
+
+    public function archivedList()
+    {
+        $payments = Payment::where('is_archived', true)->with(['cars', 'rents','customer'])->paginate(10);
+        return view('payments.archived', compact('payments'));
+    }
+
+        public function paymentList()
+    {
+        $rents = Rent::with(['payment', 'customer'])
+                    ->where('is_archived', false)
+                    ->paginate(5);
+                    
+        return view('payments.index', compact('rents'));
+    }
 }
+
+ 

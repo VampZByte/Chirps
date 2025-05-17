@@ -18,8 +18,7 @@ class Payment extends Model
         'Rent_ID',
         'Amount_Paid',
         'Payment_Date',
-        'Payment_Method',
-        'is_archived'
+        'Payment_Method'
     ];
     public function user()
     {
@@ -27,7 +26,7 @@ class Payment extends Model
     }
     public function rent()
     {
-        return $this->belongsTo(Cars::class, 'Rent_ID', 'id');
+        return $this->belongsTo(Cars::class, 'Rent_ID', 'Rent_ID');
     }
     public function customer()
     {

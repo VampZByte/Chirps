@@ -60,6 +60,9 @@
                 <button type="submit" class="bg-green-600 hover:bg-green-700 text-black font-bold px-4 py-2 rounded">
                     Submit Payment
                 </button>
+                <a href="{{ route('cars.index') }}" class="inline-block bg-red-600 text-black px-4 py-2 rounded hover:bg-blue-700">
+                    Cancel
+                </a>
             </div>
         </form>
     </div>

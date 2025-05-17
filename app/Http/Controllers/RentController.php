@@ -104,7 +104,7 @@ class RentController extends Controller
         return view('rent.list', compact('rents'));
     }
 
-    
+
     public function showContract($id)
     {
         $rent = Rent::with(['car', 'customer'])->findOrFail($id);

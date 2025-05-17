@@ -4,7 +4,7 @@
                 Rent List
             </h2>
         </x-slot>
-                    <a href="{{ route('rent.archived') }}"
+            <a href="{{ route('rent.archived') }}"
             class="bg-gray-500 text-white px-3 py-2 rounded hover:bg-gray-600">
             View Archived Rents
             </a>

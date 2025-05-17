@@ -12,13 +12,14 @@ class CarController extends Controller
     /**
      * Display a listing of the cars.
      */
-    public function index(): View
+    public function index()
     {
-        $cars = Cars::with(['car',])
-                    ->where('is_archived', false)
-                    ->paginate(10); // Adjust per page count as needed
+        $cars = Cars::where('is_archived', false)
+                    ->paginate(10);
+
         return view('cars.index', compact('cars'));
     }
+
 
     /**
      * Show the form for creating a new car.

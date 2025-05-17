@@ -14,7 +14,7 @@
 
         <h3 class="text-lg font-bold mb-3">Available Cars</h3>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4"> 
             @if ($errors->any())
             <div class="mb-4 p-4 bg-red-100 border border-red-400 rounded">
             <ul class="list-disc list-inside text-sm text-red-700">
@@ -24,7 +24,7 @@
             </ul>
             </div>
             @endif
-
+            
             @foreach ($cars as $car)
                 <div class="border p-4 rounded-md shadow bg-gray-50">
                     <h4 class="text-2xl font-semibold">{{ $car->brand }} - {{ $car->model }} ({{ $car->year }})</h4>

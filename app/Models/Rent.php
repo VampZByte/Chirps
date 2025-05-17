@@ -21,12 +21,11 @@ class Rent extends Model
         'Return_Date',
         'Total_Price',
         'Payment_Method',
-        'Fuel_Policy',      
-        'Late_Fee',         
+        'Fuel_Policy',       // e.g., "Full-to-Full" or "Same Level"
+        'Late_Fee',          // late fee per hour/day
         'Insurance_Provider',
         'Insurance_Coverage',
-        'Status',          
-        'is_archived'
+        'Status',            // e.g., "Active", "Returned", "Damaged"
     ];
 
     // Relationships
@@ -48,11 +47,6 @@ class Rent extends Model
     public function payment()
     {
         return $this->hasOne(Payment::class, 'Rent_ID', 'Rent_ID');
-    }
-
-    public function cars()
-    {
-        return $this->belongsTo(Car::class);
     }
 
     public function customers()

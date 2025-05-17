@@ -34,7 +34,7 @@
             <tbody class="divide-y divide-gray-200 text-base">
                 @forelse ($cars as $car)
                     <tr class="hover:bg-gray-50">
-                    <td class="px-4 py-3">{{ $car->brand }}</td>
+                        <td class="px-4 py-3">{{ $car->brand }}</td>
                         <td class="px-4 py-3 border">{{ $car->model }}</td>
                         <td class="px-4 py-3 border">ABCD-{{ $car->id }}</td>
                         <th class="px-4 py-3 border">{{ $car->color }}</th>

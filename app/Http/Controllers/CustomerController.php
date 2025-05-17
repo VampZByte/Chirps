@@ -10,31 +10,21 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-public function index(): View
-{
-    $customers = Customer::where('is_archived', false)
-                ->latest()
-                ->paginate(5);
 
-    return view('customers.index', compact('customers'));
-}
+    public function index(): View
+    {
+        $customers = Customer::where('is_archived', false)
+                    ->latest()
+                    ->paginate(5);
 
-    
+        return view('customers.index', compact('customers'));
+    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(): View
     {
         return view('customers.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
@@ -62,26 +52,16 @@ public function index(): View
         return redirect()->route('customers.create')->with('success', 'Customer added successfully!');
     }
 
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Customer $customer): View
     {
         return view('customers.show', compact('customer'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Customer $customer): View
     {
         return view('customers.edit', compact('customer'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Customer $customer): RedirectResponse
     {
         $validated = $request->validate([
@@ -114,9 +94,7 @@ public function index(): View
         $customer->update($validated);
         return redirect()->route('customers.create')->with('success', 'Customer updated successfully!');
     }
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Customer $customer): RedirectResponse
     {
         $customer->delete();

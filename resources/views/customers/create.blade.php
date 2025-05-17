@@ -67,6 +67,9 @@
             <x-primary-button>
                 {{ __('Save Customer') }}
             </x-primary-button>
+            <a href="{{ route('cars.index') }}" class="inline-block bg-red-600 text-black px-4 py-2 rounded hover:bg-red-700">
+                Cancel
+            </a>
         </div>
         </form>
     </div>

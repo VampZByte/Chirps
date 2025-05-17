@@ -65,7 +65,3 @@ Route::get('/customers/archived', [CustomerController::class, 'archivedList'])->
 
 Route::put('/payments/{id}/archive', [PaymentController::class, 'archive'])->name('payments.archive');
 Route::get('/payments/archived', [PaymentController::class, 'archivedList'])->name('payments.archived');
-
-
-
-
