@@ -4,12 +4,8 @@
                 Rent List
             </h2>
         </x-slot>
-                    <a href="{{ route('rent.archived') }}"
-            class="bg-gray-500 text-white px-3 py-2 rounded hover:bg-gray-600">
-            View Archived Rents
-            </a>
         <div class="max-w-5xl mx-auto mt-6 p-6 bg-white shadow-md rounded-md">
-            <h3 class="text-lg font-bold mb-4">Current Rentals</h3>
+            <h3 class="text-lg font-bold mb-4">Archived</h3>
 
             <table class="w-full table-auto text-left border-collapse">
                 <thead>
@@ -50,14 +46,6 @@
                          <button type="submit" class="bg-red-600 text-black px-1 py-1 rounded hover:bg-red-700 border">Damaged</button>
                         </form>
                 </div>
-            <div>
-                <form action="{{ route('rent.archive', $rent) }}" method="POST" class="inline-block ml-2">
-                @csrf
-                @method('PUT')
-                <button type="submit" onclick="return confirm('Are you sure you want to archive this rent record?')"
-                class="bg-gray-600 text-red px-3 py-1 rounded hover:bg-gray-700">Archive</button>
-                </form>
-            </div>
             </td>
             </tr>
             @endforeach
@@ -74,7 +62,7 @@
         </div>
     </div>
 <div class="mb-4 text-left">
-    <a href="{{ route('rent.index') }}" class="inline-block bg-blue-600 text-black px-4 py-2 rounded hover:bg-blue-700">
+    <a href="{{ route('rent.list') }}" class="inline-block bg-blue-600 text-black px-4 py-2 rounded hover:bg-blue-700">
         Back
     </a>
 </div>

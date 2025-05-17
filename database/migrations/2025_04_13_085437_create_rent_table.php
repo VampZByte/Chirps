@@ -36,6 +36,8 @@ return new class extends Migration
             $table->date('owner_date')->nullable();
             $table->string('renter_signature')->nullable();
             $table->date('renter_date')->nullable();
+            
+            $table->boolean('is_archived')->default(false); 
 
             // Foreign key constraints (optional, if customers and cars tables exist)
             $table->foreign('Customer_ID')->references('id')->on('customers')->onDelete('cascade');

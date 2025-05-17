@@ -29,11 +29,11 @@
 
             <!-- Page Content -->
 
-            <main class="flex h-screen">
+            <main class="flex h-full-screen">
                 <!-- Sidebar -->
                 <x-sidebar :links="[
                     ['url' => route('dashboard'), 'label' => 'Dashboard'],
-                    ['url' => route('customers.index'), 'label' => 'Customer'],
+                    ['url' => route('customers.create'), 'label' => 'Customer'],
                     ['url' => route('cars.index'), 'label' => 'Vehicles'],
                     ['url' => route('rent.index'), 'label' => 'Rent'],
                     ['url' => route('payments.index'), 'label' => 'Payments']

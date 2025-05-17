@@ -13,13 +13,16 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
-    {
-        return view('customers.index', [
-            'customers' => Customer::latest()->paginate(5)
-, // Fetch customers from the database
-        ]);
-    }
+public function index(): View
+{
+    $customers = Customer::where('is_archived', false)
+                ->latest()
+                ->paginate(5);
+
+    return view('customers.index', compact('customers'));
+}
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -56,7 +59,7 @@ class CustomerController extends Controller
 
         Customer::create($validated);
 
-        return redirect()->route('customers.index')->with('success', 'Customer added successfully!');
+        return redirect()->route('customers.create')->with('success', 'Customer added successfully!');
     }
 
 
@@ -108,37 +111,45 @@ class CustomerController extends Controller
             $valid = $request->file('valid_id')->store('images', 'public');
             $validated['valid_id'] = $valid;
         }
-
         $customer->update($validated);
-
-        return redirect()->route('customers.index')->with('success', 'Customer updated successfully!');
+        return redirect()->route('customers.create')->with('success', 'Customer updated successfully!');
     }
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Customer $customer): RedirectResponse
     {
         $customer->delete();
-
         return redirect()->route('customers.index')->with('success', 'Customer deleted successfully!');
     }
-
     public function customerForm(): View
-{
-    $customers = Customer::select('id', 'customer_fname')->get(); // Add customer_lname if needed
-    return view('your-form-view', compact('customers'));
-}
+    {
+        $customers = Customer::select('id', 'customer_fname')->get(); // Add customer_lname if needed
+        return view('your-form-view', compact('customers'));
+    }
 
-public function showAdmin(){
+    public function showDashboard()
+    {
+        $totalCustomers = DB::table('customers')->count();
+        $totalRents = DB::table('rent')->count();
+        $totalCars = DB::table('cars')->count();
 
-    $averageRatings = DB::table('reviews')
-        ->select('Car_ID', DB::raw('AVG(Rating) as avg_rating'))
-        ->groupBy('Car_ID')
-        ->get();
+        return view('dashboard', compact('totalCustomers', 'totalRents', 'totalCars'));
+    }
 
-    return view('dashboard', compact('averageRatings'));
-}
+    public function archive($id)
+    {
+        $customers = Customer::findOrFail($id);
+        $customers->is_archived = true;
+        $customers->save();
 
+        return redirect()->back()->with('success', 'Customer archived successfully.');
+    }
+
+    public function archivedList()
+    {
+        $customers = Customer::where('is_archived', true)->paginate(5);
+        return view('customers.archived', compact('customers'));
+    }
 
 }

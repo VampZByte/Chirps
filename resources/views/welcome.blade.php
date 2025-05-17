@@ -64,14 +64,6 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Register</a>
-                    </li>
-                </ul>
             </div>
         </div>
     </nav>
@@ -81,6 +73,7 @@
             <h1 style="color: #2b7fc4; font-weight: bold;">Car Rentals</h1>
             <p style="color: #2d7983; font-size: 18px;">Your one-stop solution for renting cars at affordable prices!</p>
             <a href="{{ route('register') }}" class="btn-join">Register</a>
+            <a href="{{ route('login') }}" class="btn-join">Login</a>
         </div>
         <div class="nav_link hero-img">
             <img src="{{ asset('image/cars.jpg') }}" alt="Car">

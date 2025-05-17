@@ -17,5 +17,6 @@ class Customer extends Model
         'license_id',
         'valid_id',
         'address',
+        'is_archived'
     ];
 }

@@ -4,13 +4,10 @@
             {{ __('Customers') }}
         </h2>
     </x-slot>
-            <a href="{{ route('customers.archived') }}"
-            class="bg-gray-500 text-white px-3 py-2 rounded hover:bg-gray-600">
-            View Archived Cars
-            </a>
+
 <!-- Display Customers -->
 <div class="w-full max-w-4xl mx-auto overflow-x-auto mt-1 bg-white shadow rounded-md p-4">
-<h2 class="text-2xl font-bold mb-6">Customers</h2>
+<h2 class="text-2xl font-bold mb-6">Archived Customers</h2>
     <table class="w-full text-left text-sm">
         <thead class="bg-gray-100 font-semibold text-gray-900 text-2xl">
             <tr>
@@ -73,12 +70,11 @@
                     <td class="px-4 py-3 border">
                         <div class="flex gap-2">
                             <a href="{{ route('customers.edit', $customer->id) }}" class="text-blue-600 hover:underline">Edit</a>
-                            <form action="{{ route('customers.archive', $customer) }}" method="POST" class="inline-block ml-2">
+                            <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
                                 @csrf
-                                @method('PUT')
-                                <button type="submit" onclick="return confirm('Are you sure you want to archive this car record?')"
-                                class="bg-gray-600 text-red px-3 py-1 rounded hover:bg-gray-700">Archive</button>
-                                </form>
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600 hover:underline">Delete</button>
+                            </form>
                         </div>
                     </td>
                     </td>
@@ -93,7 +89,7 @@
     
 </div>
 <div class="mb-4 text-left">
-    <a href="{{ route('customers.create') }}" class="inline-block bg-blue-600 text-black px-4 py-2 rounded hover:bg-blue-700">
+    <a href="{{ route('customers.index') }}" class="inline-block bg-blue-600 text-black px-4 py-2 rounded hover:bg-blue-700">
         Back
     </a>
 </div>

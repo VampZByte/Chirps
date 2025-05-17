@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('valid_id');
             $table->string('address');
             $table->timestamps();
+            $table->boolean('is_archived')->default(false); 
         });
     }
 

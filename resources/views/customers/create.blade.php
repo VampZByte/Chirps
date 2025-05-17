@@ -6,6 +6,11 @@
     </x-slot>
 
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
+        <div class="mb-4 text-right">
+            <a href="{{ route('customers.index') }}" class="inline-block bg-blue-600 text-black px-4 py-2 rounded hover:bg-blue-700">
+                Customer List
+            </a>
+        </div>
         <form method="POST" action="{{ route('customers.store') }}" enctype="multipart/form-data">
             @csrf
 

@@ -36,14 +36,6 @@
                 Create Payment
                 </a>
                 </div>  
-            <div>
-                <form action="{{ route('rent.destroy', $rent) }}" method="POST" class="inline-block ml-2">
-                @csrf
-                @method('DELETE')
-                <button type="submit" onclick="return confirm('Are you sure you want to delete this rent record?')"
-                class="bg-gray-600 text-red px-3 py-1 rounded hover:bg-gray-700">Delete</button>
-                </form>
-            </div>
             </td>
             </tr>
             @endforeach

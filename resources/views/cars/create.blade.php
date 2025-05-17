@@ -109,7 +109,11 @@
                 <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-black font-bold px-4 py-2 rounded">
                     Add Car
                 </button>
+                <a href="{{ route('cars.index') }}" class="inline-block bg-blue-600 text-black px-4 py-2 rounded hover:bg-blue-700">
+                    Cancel
+                </a>
             </div>
+            
         </form>
     </div>
 </x-app-layout>

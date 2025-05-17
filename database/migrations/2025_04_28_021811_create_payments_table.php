@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('Payment_Date');
             $table->string('Payment_Method');
             $table->timestamps();
+            $table->boolean('is_archived')->default(false); 
     });
 }
 

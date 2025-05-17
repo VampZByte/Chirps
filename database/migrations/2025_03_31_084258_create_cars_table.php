@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('availability_status');
             $table->string('car_condition');
             $table->timestamps();
+            $table->boolean('is_archived')->default(false); 
         });
     }
 

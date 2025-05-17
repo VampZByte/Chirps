@@ -9,9 +9,14 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
+
+
     public function index()
     {
-        $rents = Rent::with('payment', 'customer')->paginate(5);
+        $rents = Rent::with(['payment', 'customer'])
+                    ->where('is_archived', false)
+                    ->paginate(5);
+
         return view('payments.index', compact('rents'));
     }
 
@@ -33,17 +38,14 @@ class PaymentController extends Controller
         'payment_method' => 'required|string'
     ]);
 
-    // Correctly fetch the rent using Rent_ID
     $rent = Rent::where('Rent_ID', $request->rent_id)->firstOrFail();
 
-    // Ensure full payment only
     if ($request->amount_paid != $rent->Total_Price) {
         return back()->withErrors([
             'amount_paid' => 'Amount paid must be exactly equal to the total rent price (₱' . number_format($rent->Total_Price, 2) . ').'
         ])->withInput();
     }
 
-    // Create the payment with Customer_ID included
     Payment::create([
         'Customer_ID' => $rent->Customer_ID, 
         'Rent_ID' => $rent->Rent_ID,
@@ -54,8 +56,6 @@ class PaymentController extends Controller
 
     return redirect()->route('payments.index')->with('success', 'Payment recorded successfully.');
 }
-
-
 
     public function show(Payment $payment)
     {

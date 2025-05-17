@@ -14,7 +14,9 @@ class CarController extends Controller
      */
     public function index(): View
     {
-        $cars = Cars::paginate(10); // Adjust per page count as needed
+        $cars = Cars::with(['car',])
+                    ->where('is_archived', false)
+                    ->paginate(10); // Adjust per page count as needed
         return view('cars.index', compact('cars'));
     }
 
@@ -46,25 +48,19 @@ class CarController extends Controller
         return redirect()->route('cars.index')->with('success', 'Car added successfully!');
     }
 
-    /**
-     * Display the specified car.
-     */
+
     public function show(Cars $car): View
     {
         return view('cars.show', compact('car'));
     }
 
-    /**
-     * Show the form for editing the specified car.
-     */
+
     public function edit(Cars $car): View
     {
         return view('cars.edit', compact('car'));
     }
 
-    /**
-     * Update the specified car in storage.
-     */
+
     public function update(Request $request, Cars $car): RedirectResponse
     {
         $validated = $request->validate([
@@ -78,33 +74,40 @@ class CarController extends Controller
         ]);
 
         $car->update($validated);
-
         return redirect()->route('cars.index')->with('success', 'Car updated successfully!');
     }
 
-    /**
-     * Remove the specified car from storage.
-     */
     public function destroy(Cars $car): RedirectResponse
     {
         $car->delete();
-
         return redirect()->route('cars.index')->with('success', 'Car deleted successfully!');
     }
 
     public function returnAction($id, $status)
     {
         $car = Cars::findOrFail($id);
-    
         if (in_array($status, ['Available', 'Damaged'])) {
             $car->availability_status = $status;
             $car->save();
-    
             return redirect()->back()->with('success', "Car marked as $status.");
         }
-    
         return redirect()->back()->with('error', 'Invalid status.');
     }
-    
+
+    public function archive($id)
+    {
+        $cars = Cars::findOrFail($id);
+        $cars->is_archived = true;
+        $cars->save();
+
+        return redirect()->back()->with('success', 'Car archived successfully.');
+    }
+
+    public function archivedList()
+    {
+        $cars = Cars::where('is_archived', true)->paginate(10);
+        return view('cars.archived', compact('cars'));
+    }
+
 
 }

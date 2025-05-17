@@ -21,11 +21,12 @@ class Rent extends Model
         'Return_Date',
         'Total_Price',
         'Payment_Method',
-        'Fuel_Policy',       // e.g., "Full-to-Full" or "Same Level"
-        'Late_Fee',          // late fee per hour/day
+        'Fuel_Policy',      
+        'Late_Fee',         
         'Insurance_Provider',
         'Insurance_Coverage',
-        'Status',            // e.g., "Active", "Returned", "Damaged"
+        'Status',          
+        'is_archived'
     ];
 
     // Relationships

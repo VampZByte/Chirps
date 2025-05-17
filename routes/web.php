@@ -7,7 +7,6 @@ use App\Http\Controllers\RentController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,7 +17,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 require __DIR__.'/auth.php';
-
 
 Route::get('/dashboard', [CustomerController::class, 'showAdmin'])->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -54,6 +52,19 @@ Route::delete('/rent/{rent}', [RentController::class, 'destroy'])->name('rent.de
 
 Route::get('/rent/contract/{id}', [RentController::class, 'showContract'])->name('rent.contract');
 
+Route::get('/dashboard', [CustomerController::class, 'showDashboard'])->name('dashboard');
+
+Route::put('/rent/{id}/archive', [RentController::class, 'archive'])->name('rent.archive');
+Route::get('/rent/archived', [RentController::class, 'archivedList'])->name('rent.archived');
+
+Route::put('/cars/{id}/archive', [CarController::class, 'archive'])->name('cars.archive');
+Route::get('/cars/archived', [CarController::class, 'archivedList'])->name('cars.archived');
+
+Route::put('/customers/{id}/archive', [CustomerController::class, 'archive'])->name('customers.archive');
+Route::get('/customers/archived', [CustomerController::class, 'archivedList'])->name('customers.archived');
+
+Route::put('/payments/{id}/archive', [PaymentController::class, 'archive'])->name('payments.archive');
+Route::get('/payments/archived', [PaymentController::class, 'archivedList'])->name('payments.archived');
 
 
 

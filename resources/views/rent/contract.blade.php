@@ -1,10 +1,23 @@
+<script>
+function printContract() {
+    const printContent = document.getElementById('contract').innerHTML;
+    const originalContent = document.body.innerHTML;
+
+    document.body.innerHTML = printContent;
+    window.print();
+    document.body.innerHTML = originalContent;
+    location.reload(); // Optional: to reload page and restore layout/events
+}
+</script>
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 leading-tight">
             Car Rental Agreement and Contract
         </h2>
     </x-slot>
-
+    
+<div id="contract">
     <div class="max-w-4xl mx-auto p-6 bg-white rounded shadow">
         <h1 class="text-2xl font-bold text-center mb-6">CAR RENTAL AGREEMENT AND CONTRACT</h1>
 
@@ -15,7 +28,7 @@
         <p>Age: {{ $rent->customer->age ?? 'N/A' }}</p>
         <p>Address: {{ $rent->customer->address ?? 'N/A' }}</p>
         <p>Phone: {{ $rent->customer->phone ?? 'N/A' }}</p>
-        <p>Driver’s License Picture: {{ $rent->customers->license_pic ?? 'N/A' }}</p>
+        <p>Driver's License Picture: {{ $rent->customers->license_pic ?? 'N/A' }}</p>
 
         <hr class="my-4">
 
@@ -44,7 +57,6 @@
 
         <h3 class="font-bold">4. Fuel Policy</h3>
         <p> {{ $rent->fuel_policy === 'full_to_full' ? 'Full-to-Full' : 'Same level as rented' }}</p>
-        <p>- If the vehicle is returned with less fuel, the renter agrees to pay for the missing fuel plus a ₱500 service fee.</p>
 
         <hr class="my-4">
 
@@ -53,7 +65,6 @@
         <ul class="list-disc pl-6">
             <li>- Will not be used for illegal purposes or racing</li>
         </ul>
-
 
         <hr class="my-4">
 
@@ -90,5 +101,12 @@
         <h3 class="font-bold">10. Signatures</h3>
         <p>Owner Signature: _________________________ Date: ____________</p>
         <p>Renter Signature: ________________________ Date: ____________</p>
+
+        <div class="flex justify-end mt-6">
+           <button onclick="printContract()" class="bg-black-600 text-black px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                Print Agreement
+            </button>
+        </div>
     </div>
+</div>  
 </x-app-layout>
